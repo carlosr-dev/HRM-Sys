@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Login
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('verify', [LoginController::class, 'verify'])->name('verify'); 
+
+//logout
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// dashboard
+Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+
+
+// users
+Route::resource('users', UserController::class);
+
+// employees
+Route::resource('employees', EmployeeController::class);
