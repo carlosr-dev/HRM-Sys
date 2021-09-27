@@ -1,15 +1,15 @@
 @extends ('app.layout')
 @section('content')
 
-    <h1 class="h3 mt-5 mb-4 text-gray-800">Usuarios </h1>
+    <h1 class="h3 mt-5 mb-4 text-gray-800">Departamentos </h1>
     <div class="row">
         <div class="col-lg-12">
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="{{ route('users.create') }}"
+                    <a href="{{ route('departments.create') }}"
                         class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-plus fa-sm text-white-50"></i> Nuevo usuario</a>
+                            class="fas fa-plus fa-sm text-white-50"></i> Nuevo departamento</a>
                 </div>
                 <div class="card-body">
                     @if (session()->get('success'))
@@ -23,30 +23,20 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Usuario</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($users) > 0)
-                                    @foreach ($users as $user)
+                                @if (count($departments) > 0)
+                                    @foreach ($departments as $department)
                                         <tr>
-                                            <td> {{ $user->id }} </td>
-                                            <td> {{ $user->name }}</td>
-                                            <td> {{ $user->email }} </td>
+                                            <td> {{ $department->id }} </td>
+                                            <td> {{ $department->name }}</td>
                                             <td>
-                                                @if ($user->type_user == 1)
-                                                    <div class="badge badge-info">Administrador</div>
-                                                @else
-                                                    <div class="badge badge-warning">Sub Administrador</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('users.edit', $user->id) }}"
+                                                <a href="{{ route('departments.edit', $department->id) }}"
                                                     class="btn btn-primary btn-circle btn-sm"><i
                                                         class="far fa-edit"></i></a>
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="post"
+                                                <form action="{{ route('departments.destroy', $department->id) }}" method="post"
                                                     style="display: inline-block">
                                                     @csrf
                                                     @method('DELETE')
@@ -61,7 +51,7 @@
                         @else
                             <tbody>
                                 <tr>
-                                    <td align="center" colspan="5">
+                                    <td align="center" colspan="3">
                                         <h6>NO SE ENCONTRARON REGISTROS</h6>
                                     </td>
                                 </tr>

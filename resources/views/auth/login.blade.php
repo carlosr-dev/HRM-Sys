@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
 
 </head>
 
@@ -27,19 +27,21 @@
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
-            
+
             <div class="col-xl-10 col-lg-12 col-md-9">
-                
+
                 @if ($message = Session::get('danger'))
                     <div class="alert alert-danger alert-dismissible mt-4">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <p align="center">{{ $message }}</p align="center">
+                        <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                        <p align="center">{{ $message }}</p align="center">
                     </div>
                 @endif
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-dismissible mt-4">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <p align="center">{{ $message }}</p>
+                        <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                        <p align="center">{{ $message }}</p>
                     </div>
                 @endif
                 <div class="card o-hidden border-0 shadow-lg my-5">
@@ -63,15 +65,17 @@
                                             @endif
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" required placeholder="Password">
+                                            <input type="password" name="password"
+                                                class="form-control form-control-user" id="exampleInputPassword"
+                                                required placeholder="Password">
                                             @if ($errors->has('password'))
                                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                             @endif
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" name="remember" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" name="remember" class="custom-control-input"
+                                                    id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
@@ -94,7 +98,7 @@
 
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
 </body>
 

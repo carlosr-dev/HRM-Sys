@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +35,9 @@ Route::resource('users', UserController::class);
 
 // employees
 Route::resource('employees', EmployeeController::class);
+
+// companies
+Route::resource('branches', BranchController::class);
+
+// departments
+Route::resource('departments', DepartmentController::class);

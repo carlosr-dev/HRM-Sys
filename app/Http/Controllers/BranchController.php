@@ -14,7 +14,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        $branches = Branch::all();
+        return view('Company.index', compact('branches'));
     }
 
     /**
@@ -24,7 +25,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        //
+        return view('Company.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $branchData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $branch = Branch::create($branchData);
+
+        return redirect()->route('branches.index')->with('success', 'La empresa ha sido guardada!');
     }
 
     /**
@@ -55,9 +62,10 @@ class BranchController extends Controller
      * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function edit(Branch $branch)
+    public function edit($id)
     {
-        //
+        $branch = Branch::findOrFail($id);
+        return view('Company.edit', compact('branch')); 
     }
 
     /**
@@ -67,9 +75,15 @@ class BranchController extends Controller
      * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Branch $branch)
+    public function update(Request $request, $id)
     {
-        //
+        $branchData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        Branch::whereId($id)->update($branchData);
+
+        return redirect()->route('branches.index')->with('success', 'La empresa ha sido actualizada');
     }
 
     /**
@@ -78,8 +92,11 @@ class BranchController extends Controller
      * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Branch $branch)
+    public function destroy($id)
     {
-        //
+        $branch = Branch::findOrFail($id);
+        $branch->delete();
+
+        return redirect()->route('branches.index')->with('success', 'La empresa ha sido eliminada');
     }
 }

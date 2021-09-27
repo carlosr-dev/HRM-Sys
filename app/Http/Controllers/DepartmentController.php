@@ -14,7 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Department::all();
+        return view('Department.index', compact('departments'));
     }
 
     /**
@@ -24,7 +25,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('Department.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $departmentData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $department = Department::create($departmentData);
+
+        return redirect()->route('departments.index')->with('success', 'El departamento ha sido guardado!');
     }
 
     /**
@@ -55,9 +62,10 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
+    public function edit($id)
     {
-        //
+        $department = Department::findOrFail($id);
+        return view('Department.edit', compact('department')); 
     }
 
     /**
@@ -67,9 +75,15 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, $id)
     {
-        //
+        $departmentData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        Department::whereId($id)->update($departmentData);
+
+        return redirect()->route('departments.index')->with('success', 'El departamento ha sido actualizado');
     }
 
     /**
@@ -78,8 +92,11 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        //
+        $department = Department::findOrFail($id);
+        $department->delete();
+
+        return redirect()->route('departments.index')->with('success', 'El departamento ha sido eliminado');
     }
 }
